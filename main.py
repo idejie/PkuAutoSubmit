@@ -8,7 +8,7 @@ import json
 import datetime
 
 
-def wechat_notification(uid,appToken, info, str(submit_response),url):
+def wechat_notification(uid,appToken, info,url):
     
     data = {
           "appToken":appToken,
@@ -151,9 +151,9 @@ if __name__ == '__main__':
     submit_response=json.loads(submit.text)
     if submit_response['code'] in [1, '1'] and submit_response["msg"] == '成功':
         print(f'Success: {submit_response}') # Success
-        wechat_notification(uid,appToken, username+dt + '预约成功', str(submit_response),t_1.url)
+        wechat_notification(uid,appToken, username+dt + '预约成功',,t_1.url)
     else:
         print(f'Failed: {submit_response}') # Failed
         print(f'saveURL return : {res_0}') # Failed
-        wechat_notification(uid,appToken, username+dt + '预约失败', str(submit_response),t_1.url)
+        wechat_notification(uid,appToken, username+dt + '预约失败',t_1.url)
         exit(1)
