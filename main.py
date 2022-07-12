@@ -118,7 +118,7 @@ if __name__ == '__main__':
     MAIL_ADDRESS = os.getenv("MAIL_ADDRESS")
     PHONE_NUMBER = os.getenv("PHONE_NUMBER")
     uid = os.getenv("SENDKEY")
-    appToken = os.getenv("SENDKEY")
+    appToken = os.getenv("APPTOKEN")
 
     pku = PkuAccount(username, passwd)
 
