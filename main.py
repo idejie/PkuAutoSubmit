@@ -20,7 +20,7 @@ def wechat_notification(uid,appToken, info,url):
         }
     
     responseBody = requests.post(
-        url = RequestURL.wechatNotificationUrl % key,
+        url = RequestURL.wechatNotificationUrl,
         data=data
     )
     if responseBody.text == 'ok':
