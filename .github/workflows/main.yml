@@ -40,6 +40,7 @@ jobs:
           MAIL_ADDRESS: ${{ secrets.MAIL_ADDRESS }}
           PHONE_NUMBER: ${{ secrets.PHONE_NUMBER }}
           SENDKEY: ${{ secrets.SENDKEY }}
+          APPTOKEN: ${{secrets.APPTOKEN}}
         run:
           python main.py
           
