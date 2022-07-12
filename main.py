@@ -9,7 +9,7 @@ import datetime
 
 
 def wechat_notification(uid,appToken, info,url):
-    
+    print(appToken)
     data = {
               "appToken":appToken,
               "content":'备案成功',
