@@ -10,20 +10,21 @@ import datetime
 
 def wechat_notification(uid,appToken, info,url):
     
+    import requests
     data = {
-          "appToken":appToken,
-          "content":info,
-          "summary":"消息摘要",
-          "contentType":1,
-          "uids":[uid],
-          "url":url
-        }
-    
+              "appToken":appToken,
+              "content":'备案成功',
+              "summary":info,
+              "contentType":1,
+              "uids":[uid],
+              "url":url
+            }
+
     responseBody = requests.post(
-        url = RequestURL.wechatNotificationUrl,
+        url = 'http://wxpusher.zjiecode.com/api/send/message',
         json=data
     )
-    if responseBody.text == 'ok':
+    if '处理成功' in responseBody.text:
         print('微信提醒发送成功')
     else:
         print('微信提醒发送失败，返回信息：')
