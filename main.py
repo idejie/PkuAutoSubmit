@@ -8,13 +8,20 @@ import json
 import datetime
 
 
-def wechat_notification(key, title, info):
-    responseBody = requests.get(
-        url = RequestURL.wechatNotificationUrl % key,
-        params={
-            "text":title,
-            "desp":info
+def wechat_notification(uid,appToken, info, str(submit_response),url):
+    
+    data = {
+          "appToken":appToken,
+          "content":info,
+          "summary":"消息摘要",
+          "contentType":1,
+          "uids":[uid],
+          "url":url
         }
+    
+    responseBody = requests.post(
+        url = RequestURL.wechatNotificationUrl % key,
+        data=data
     )
     if responseBody.text == 'ok':
         print('微信提醒发送成功')
@@ -110,7 +117,8 @@ if __name__ == '__main__':
     passwd = os.getenv("PASSWORD")
     MAIL_ADDRESS = os.getenv("MAIL_ADDRESS")
     PHONE_NUMBER = os.getenv("PHONE_NUMBER")
-    sendkey = os.getenv("SENDKEY")
+    uid = os.getenv("SENDKEY")
+    appToken = os.getenv("SENDKEY")
 
     pku = PkuAccount(username, passwd)
 
@@ -136,16 +144,16 @@ if __name__ == '__main__':
     res_0 = json.loads(r0.text)
     if res_0['code'] not in [1, '1']:
         print(f'Failed: {res_0}') # Failed
-        wechat_notification(sendkey, dt + '预约失败', str(res_0))
+        wechat_notification(sendkey, str(username)+dt + '预约失败', str(res_0))
         exit(1)
 
     submit=pku.session.get(f'https://simso.pku.edu.cn/ssapi/stuaffair/epiApply/submitSqxx?sid={sid}&_sk={xh}&sqbh={res_0["row"]}')
     submit_response=json.loads(submit.text)
     if submit_response['code'] in [1, '1'] and submit_response["msg"] == '成功':
         print(f'Success: {submit_response}') # Success
-        wechat_notification(sendkey, dt + '预约成功', str(submit_response))
+        wechat_notification(uid,appToken, username+dt + '预约成功', str(submit_response),t_1.url)
     else:
         print(f'Failed: {submit_response}') # Failed
         print(f'saveURL return : {res_0}') # Failed
-        wechat_notification(sendkey, dt + '预约失败', str(submit_response))
+        wechat_notification(uid,appToken, username+dt + '预约失败', str(submit_response),t_1.url)
         exit(1)
