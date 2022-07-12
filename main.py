@@ -21,7 +21,7 @@ def wechat_notification(uid,appToken, info,url):
     
     responseBody = requests.post(
         url = RequestURL.wechatNotificationUrl,
-        data=data
+        json=data
     )
     if responseBody.text == 'ok':
         print('微信提醒发送成功')
