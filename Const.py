@@ -1,2 +1,2 @@
 class RequestURL(object):    
-    wechatNotificationUrl = "http://wx.xtuis.cn/%s.send"
+    wechatNotificationUrl = "http://wxpusher.zjiecode.com/api/send/message"
